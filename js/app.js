@@ -1,22 +1,62 @@
     const cardArea = document.querySelector('#cardsArea');    
     const form = document.querySelector('form');
+    const pagination = document.querySelector('#pagination');
     let url = `https://pokeapi.co/api/v2/pokemon/`;
+
+    const forward = document.getElementById('forward');
+    const goBack = document.getElementById('goBack');
 
     window.onload = async () => {
         form.addEventListener('submit', search);
         try {
-            const pokemonsData= await getPokemonsData(url); // getting a list with containing the name and url for specific info for each pokemon
+
+            let allHomeData= await getData(url);
+            let previousPage;
+
+            pokemonsData = allHomeData.results;
             showPokemons(pokemonsData,"home");
+
+            forward.addEventListener('click', async ()=>{
+                cleanCards();
+                url = allHomeData.next;
+                allHomeData= await getData(url);
+                pokemonsData= await getData(url);
+                previousPage = allHomeData.previous;
+                showPokemons(pokemonsData.results, "home");
+
+                if(goBack.classList.contains("disabled") && allHomeData.previous!=null){
+                    goBack.classList.remove("disabled");
+                }
+            })
+
+            goBack.addEventListener('click', async ()=>{
+                url = previousPage;
+                cleanCards();
+                pokemonsData= await getData(url);
+                showPokemons(pokemonsData.results, "home");
+
+                if(forward.classList.contains("disabled") && allHomeData.next!=null){
+                    forward.classList.remove("disabled");
+                }
+            })
+
+            if(allHomeData.previous==null){
+                goBack.classList.add("disabled");
+            }
+
+            if(allHomeData.next==null){
+                forward.classList.add("disabled");
+            }
+
         } catch (error) {
             console.log(error);
         }
+        
     }
 
     async function search(e) {
-        // cleaning previous results 
-        while(cardArea.firstChild){
-            cardArea.removeChild(cardArea.firstChild);
-        }
+        cleanCards();
+        pagination.remove();
 
         e.preventDefault();
         const searchedTerm = document.querySelector('#term').value;
@@ -44,10 +84,11 @@
         }
     }
 
-    async function getPokemonsData(){ //TODO: FIX THIS
-        const answer = await fetch(url);
-        const pokemonsData = await answer.json();
-        return pokemonsData.results;
+    function cleanCards(){
+        // cleaning previous results 
+        while(cardArea.firstChild){
+            cardArea.removeChild(cardArea.firstChild);
+        }
     }
 
     async function getData(url){
