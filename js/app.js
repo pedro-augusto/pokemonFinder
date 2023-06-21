@@ -27,7 +27,6 @@
             showPokemons(pokemonsData,"home"); // sending only the array with pokemons to be shown
 
             forward.addEventListener('click', async ()=>{ // acting when the user clicks to go to the next page
-                console.log(allHomeData.previous);
                 cleanCards();
                 url = nextPage;
                 allHomeData= await getData(url); // we need this to know what is the previous page
@@ -170,7 +169,6 @@
                 // searching by ability
                 url = `https://pokeapi.co/api/v2/ability/${searchedTerm}`;
                 result = await getData(url); // FIXME: wouldn't it be better and faster without async and await? For instance, if instead of waiting to check if what was searched was a name I could search everything at the same time
-                console.log(result.pokemon)
                 showPokemons(result.pokemon,"ability");
             } catch (error) {}
 
