@@ -25,3 +25,15 @@ body{
     color: #045cb4;
     text-shadow: -2px -2px 0 #f8d323, 2px -2px 0 #f8d323, -2px 2px 0 #f8d323, 2px 2px 0 #f8d323;
 }
+
+.marginLabel {
+    margin-top: 1% !important;
+}
+
+.headerLabel {
+    margin-top: -1%;
+}
+
+.pokemonName {
+    text-transform: uppercase !important;
+}
