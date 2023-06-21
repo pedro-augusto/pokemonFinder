@@ -3,38 +3,50 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pokemon Finder</title>
+        <link rel="icon" type="image/x-icon" href="images/favicon.png">
         <link rel="stylesheet" type="text/css" href="css/semantic/semantic.min.css"> 
         <link rel="stylesheet" type="text/css" href="css/style.css">  
     </head>
     <body>
         <header>
-            <h1>Pokemon Finder</h1>
+            <h1 id="titlePage">Pokemon Finder</h1>
         </header>
-        <main>
-            <form>
-                <label class="block text-white font-bold uppercase">Search term:</label>
-                <input type="text" id="term" placeholder="Search a pokemon by name, ability or type">
-
-                <input type="submit" value="Search">
-            </form>
-
-            <div class="ui link cards" id="cardsArea">
-                
+        <main class="ui centered grid">
+            <div class="ui row">
+                <div class="ui seven wide column">
+                    <form>
+                        <div class="ui fluid action input">
+                            <input type="text" id="term" placeholder="Search a pokemon by name, ability or type">
+                            <button class="ui icon button" type="submit">
+                              <i class="search icon"></i>
+                            </button>
+                          </div>
+                    </form>
+                </div>
             </div>
-            <div id="pagination">
-                <button class="ui button" id="goBack">
-                    <i class="chevron left icon"></i>
-                </button>
-                <button class="ui button" id="forward">
-                    <i class="chevron right icon"></i>
-                </button>
-            </div>
-        </main>
-        <script src="js/app.js">
             
-        </script>
+            <div class="ui row">
+                <div class="ui fitfteen wide column">
+                    <div class="ui centered special cards" id="cardsArea">
+                </div>
+                </div>
+            </div>
+
+            <div class="ui row">
+                <div id="pagination">
+                    <button class="ui blue button" id="goBack">
+                        <i class="chevron left icon"></i>
+                    </button>
+                    <button class="ui blue button" id="forward">
+                        <i class="chevron right icon"></i>
+                    </button>
+                </div>
+            </div>
+            
+        </main>
+        <script src="js/app.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
         <script src="css/semantic/semantic.min.js"></script>
-
+        
     </body>
 </html>

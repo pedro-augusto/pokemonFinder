@@ -119,9 +119,13 @@
     }
 
     function generateCard(specificPokemonData){
+        console.log(specificPokemonData)
+        console.log(specificPokemonData.stats[0].base_stat)
+
         let card =` 
 
             <div class="card">
+            
                 <div class="image">
                 <img src="${specificPokemonData.sprites.front_default}">
                 </div>
@@ -130,22 +134,32 @@
                 <div class="meta">
                     <a>Pokemon ID: ${specificPokemonData.id}</a>
                 </div>
-                <div class="description">
-                    Abilities:
-                    <ul class="abilityList">`;
-
-            for (let index = 0; index < specificPokemonData.abilities.length; index++) {
-                card+= `<li class="capitalised">${specificPokemonData.abilities[index].ability.name}</li>`;
-            }
+                <div class="description">` 
                     
-            card +=`</ul>
-                Type: <ul>`
+        specificPokemonData.stats.forEach(function (stat) {
+            card += `<div class="ui yellow progress" >
+            <div class="bar" style="transition-duration: 300ms; width: ${(stat.base_stat*100)/255}%;">
+                <div class="progress">${stat.base_stat}</div>
+            </div>
+            <div class="label">${(stat.stat.name).toUpperCase()}</div>
+            </div>`
+            
+        })        
+                
+            card+= `<div class="ui divider"></div><h4>Abilities:</h4>`;
 
-            for (let index = 0; index < specificPokemonData.types.length; index++) {
-                card+= `<li class="capitalised">${specificPokemonData.types[index].type.name}</li>`;
-            }
+            specificPokemonData.abilities.forEach(function (ability){
+                card+= `<span class="ui blue label capitalised center-aligned">${ability.ability.name}</span>`;
+            })
+                    
+            card +=`<div class="ui divider"></div>
+                        <h4>Type:</h4>`
 
-            card+=`</ul></div>
+            specificPokemonData.types.forEach( function (type){
+                card+= `<span class="ui red label capitalised center-aligned">${type.type.name}</span>`;
+            })
+
+            card+=`</div>
                 </div>
             </div>`;
 
