@@ -72,7 +72,7 @@
             }
 
         } catch (error) {
-            console.log(error); // FIXME: what is a more appropriate way to handle error?
+            console.log(error); // FIXME: what is a more appropriate way to handle error? // MESSAGE TO USER
         }
         
     }
@@ -151,17 +151,17 @@
         pagination.remove(); // when we are consulting the API for a specific pokemon, type or ability it does not return with pagination. Therefore, we delete the pagination in case the user searches something
         e.preventDefault();
 
-        const searchedTerm = document.querySelector('#term').value;
+        const searchedTerm = document.querySelector('#term').value.toLowerCase();
 
         if(searchedTerm!=='') {
             cleanCards();
 
-            // FIXME: what is a better way to do this instead of 3 try catch?
+            // FIXME: what is a better way to do this instead of 3 try catch? One function for each search
 
             try{
                 // searching by name
                 url = `https://pokeapi.co/api/v2/pokemon/${searchedTerm}`;
-                result = getData(url);
+                result = await getData(url);
                 generateCard(result);
             } catch (error) {}
 
