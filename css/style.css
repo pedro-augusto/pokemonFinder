@@ -37,3 +37,7 @@ body{
 .pokemonName {
     text-transform: uppercase !important;
 }
+
+#spaceCheckboxes{
+    margin-top: 2%;
+}

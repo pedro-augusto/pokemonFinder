@@ -11,20 +11,39 @@
     </head>
     <body>
         <header>
-            <h1 id="titlePage">Pokemon Finder</h1>
+            <a href="index.html"><h1 id="titlePage">Pokemon Finder</h1></a>
         </header>
         <main class="ui centered grid">
             <div class="ui row">
                 <div class="ui seven wide column">
-                    <form>
+                    <form id="searchBar" class="ui form">
                         <div class="ui fluid action input">
                             <input type="text" id="term" placeholder="Search a pokemon by name, ability or type">
+                            
                             <button class="ui icon button" type="submit">
                               <i class="search icon"></i>
                             </button>
                           </div>
+                          <div class="three fields" id="spaceCheckboxes">
+                            <div class="field ui checkbox">
+                                <input type="checkbox" id="name" name="name" value="name" checked>
+                                <label for="name"> By Name</label><br>
+                            </div>
+                            <div class="field ui checkbox">
+                                <input type="checkbox" id="type" name="type" value="type" checked>
+                                <label for="type"> By Type</label><br>
+                            </div>
+                            <div class="field ui checkbox">
+                                <input type="checkbox" id="ability" name="ability" value="ability" checked>
+                                <label for="ability"> By Ability</label><br>
+                            </div>
+                          </div>
                     </form>
                 </div>
+            </div>
+
+            <div id="error">
+                
             </div>
             
             <div class="ui row">
@@ -46,10 +65,6 @@
             </div>
             
         </main>
-        <script src="js/app.js"></script>
-        <script>
-            $('.ui.accordion').accordion();
-        </script>
-        
+        <script src="js/app.js"></script>       
     </body>
 </html>
